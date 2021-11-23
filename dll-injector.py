@@ -5,7 +5,7 @@ from win32com.client import GetObject
 page_rwx_val = 0x40
 process_all = 0x1F0FFF
 memcommit = 0x00001000
-kernel132_variable = windll.kernel132
+kernel132_variable = windll.kernel32
 
 if len(sys.argv) < 2:
 	print(f"DLL injector ./{sys.argv[0]} <process to inject>")
@@ -13,7 +13,7 @@ if len(sys.argv) < 2:
 
 proc = sys.argv[1]
 WMI = GetObject('winmgmts:')
-p = WMI.ExecQuery('SELECT * FROM Win32_Process WHERE Name="{proc}"')
+p = WMI.ExecQuery('SELECT * FROM Win32_Process WHERE Name="%s"'%(proc))
 
 if len(p) == 0:
 	print(f"Process {proc} not found, exiting")
