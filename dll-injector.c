@@ -3,24 +3,24 @@
 
 int main() {
     // The DLL path we want to inject and the target process id.
-    char* dllpath, processName;
-    int p_id, p_pid;
+    char* dllpath[150], processName;
+    int p_id;
     printf("Insert DLL path:\n");
-    scanf("%as", &dllpath);
+    scanf("%140s", &dllpath);
     printf("Insert process name:\n");
     scanf("%as", &processName);
-    p_id = getpid(processName)
-    print("Process ID: %d\n", p_id);
+    p_id = getpid(processName);
+    printf("Process ID: %d\n", p_id);
     printf("#### Starting ####\n");
 
 
-    // Open target process handle    
+    // Open target process handle
     HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, p_id);
     if (hProcess == NULL) {
         printf("[!] Unable to find the target process id: %d\n" , p_id);
         return 1;
     }
-    
+
     printf("[+] Open target process handle\n");
 
     // Getting targt memory address for the dll path
